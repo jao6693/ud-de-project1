@@ -17,10 +17,10 @@ user_table_create = ("CREATE TABLE IF NOT EXISTS d_users \
   (user_id int, first_name varchar(80), last_name varchar(100), gender character, level varchar(10));")
 
 song_table_create = ("CREATE TABLE IF NOT EXISTS d_songs \
-  (song_id varchar(18), title varchar(200), artist_id varchar(18), year smallint, duration numeric);")
+  (song_id varchar(18), title varchar(200), artist_id varchar(18), year int, duration numeric);")
 
 artist_table_create = ("CREATE TABLE IF NOT EXISTS d_artists \
-  (artist_id varchar(18), name varchar(200), location varchar(200), latitude int, longitude int);")
+  (artist_id varchar(18), name varchar(200), location varchar(200), latitude numeric, longitude numeric);")
 
 time_table_create = ("CREATE TABLE IF NOT EXISTS d_times \
   (start_time timestamp, hour smallint, day smallint, week smallint, month smallint, year smallint, weekday smallint);")
@@ -37,12 +37,13 @@ song_table_insert = ("INSERT INTO d_songs \
   (song_id, title, artist_id, year, duration) \
   VALUES(%s, %s, %s, %s, %s)")
 
-artist_table_insert = ("""
-""")
+artist_table_insert = ("INSERT INTO d_artists \
+  (artist_id, name, location, latitude, longitude) \
+  VALUES(%s, %s, %s, %s, %s)")
 
-
-time_table_insert = ("""
-""")
+time_table_insert = ("INSERT INTO d_times \
+  (start_time, hour, day, week, month, year, weekday) \
+  VALUES(%s, %s, %s, %s, %s, %s, %s)")
 
 # FIND SONGS
 
