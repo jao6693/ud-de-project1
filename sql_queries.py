@@ -26,7 +26,7 @@ artist_table_create = ("CREATE TABLE IF NOT EXISTS d_artists \
   location varchar(200), latitude numeric, longitude numeric);")
 
 time_table_create = ("CREATE TABLE IF NOT EXISTS d_times \
-  (start_time timestamp PRIMARY KEY, hour smallint NOT NULL, day smallint NOT NULL, \
+  (start_time timestamp PRIMARY KEY, hour smallint, day smallint NOT NULL, \
   week smallint NOT NULL, month smallint NOT NULL, year smallint NOT NULL, weekday smallint NOT NULL);")
 
 # INSERT RECORDS
