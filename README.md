@@ -24,4 +24,4 @@ Run the following commands in the terminal:
 * `python create_tables.py` to create the sparkify database and the corresponding tables
 * `python etl.py` to process the files (logs/songs) stored  
 
-At the end the database can be requested for analisys purposes  
+At the end the database can be requested for analysis purposes  
