@@ -8,7 +8,7 @@ from sql_queries import *
 
 
 def process_song_file(cur, filepath):
-    # open song file
+    """ open song file """
     df = pd.read_json(filepath, lines=True).set_index('num_songs')
 
     # insert song record
@@ -32,7 +32,7 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
-    # open log file
+    """ open log file """
     df = pd.read_json(filepath, lines=True)
 
     # filter by NextSong action
@@ -80,7 +80,7 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
-    # get all files matching extension from directory
+    """ get all files matching extension from directory """
     all_files = []
     for root, dirs, files in os.walk(filepath):
         files = glob.glob(os.path.join(root,'*.json'))
@@ -99,7 +99,7 @@ def process_data(cur, conn, filepath, func):
 
 
 def convert_np_to_native(value):
-    # convert numpy to native types to avoid problems during DB processing
+    """ convert numpy to native types to avoid problems during DB processing """
     if isinstance(value, np.int32):
         return value.item()
     if isinstance(value, np.int64):
