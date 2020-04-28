@@ -24,7 +24,7 @@ def process_song_file(cur, filepath):
     artist_data = df.loc[1, ['artist_id', 'artist_name',
                              'artist_location', 'artist_latitude', 'artist_longitude']]
 
-    artist_data = artist_data.fillna(0, inplace=True).to_numpy().tolist()
+    artist_data = artist_data.fillna(0).to_numpy().tolist()
     # perform data type conversions
     artist_data = list(map(convert_np_to_native, artist_data))
 
