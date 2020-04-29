@@ -71,11 +71,20 @@ def process_log_file(cur, filepath):
 
     # insert user records
     for i, row in user_df.iterrows():
-        cur.execute(user_table_insert, row)
+
+        # as the insert query for users uses named arguments the data passed must be a dictionary
+        user_data = {
+            'user_id': row.userId, \
+            'first_name': row.firstName, \
+            'last_name': row.lastName, \
+            'gender': row.gender, \
+            'level': row.level }
+
+        cur.execute(user_table_insert, user_data)
 
     # insert songplay records
     for index, row in df.iterrows():
-        
+
         # get song_id and artist_id from song and artist tables
         cur.execute(song_select, (row.song, row.artist, row.length))
         results = cur.fetchone()

@@ -36,11 +36,15 @@ songplay_table_insert = ("INSERT INTO f_songplays \
   (start_time, user_id, level, song_id, artist_id, session_id, location, user_agent) \
   VALUES (%s, %s, %s, %s, %s, %s, %s, %s)")
 
-# what to do in case of conflict ? the user data should be TIME DEPENDENT
+# user data should be TIME DEPENDENT
+# use named arguments (as dictionary) to deal with ON CONFLICT UPDATE
+# https://www.psycopg.org/docs/usage.html
 user_table_insert = ("INSERT INTO d_users \
   (user_id, first_name, last_name, gender, level) \
-  VALUES(%s, %s, %s, %s, %s) \
-  ON CONFLICT DO NOTHING")
+  VALUES(%(user_id)s, %(first_name)s, %(last_name)s, %(gender)s, %(level)s) \
+  ON CONFLICT (user_id) DO UPDATE \
+  SET level = EXCLUDED.level")
+
 # potentially no conflict to expect
 song_table_insert = ("INSERT INTO d_songs \
   (song_id, title, artist_id, year, duration) \
