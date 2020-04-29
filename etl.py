@@ -8,7 +8,13 @@ from sql_queries import *
 
 
 def process_song_file(cur, filepath):
-    """ open song file """
+    """ 
+    - open song file
+    - extract song data from file (song_id, title, artist_id, year, duration)
+    - extract artist_data from file (artist_id, artist_name, artist_location, artist_latitude, artist_longitude)
+    - insert the corresponding data into the database
+    """
+
     df = pd.read_json(filepath, lines=True).set_index('num_songs')
 
     # insert song record
@@ -32,7 +38,14 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
-    """ open log file """
+    """
+    - open log file
+    - extract time data from file (start_time, hour, day, week, month, year, weekday)
+    - extract user data from file (userId', firstName, lastName, gender, level)
+    - extract and combine songplay data
+    - insert the corresponding data into the database (dealing with conflicting data)
+    """
+
     df = pd.read_json(filepath, lines=True)
 
     # filter by NextSong action
@@ -99,7 +112,7 @@ def process_data(cur, conn, filepath, func):
 
 
 def convert_np_to_native(value):
-    """ convert numpy to native types to avoid problems during DB processing """
+    """ convert numpy to native types to avoid problems during database processing """
     if isinstance(value, np.int32):
         return value.item()
     if isinstance(value, np.int64):
